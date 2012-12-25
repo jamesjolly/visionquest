@@ -1,10 +1,13 @@
 """
-reverse_image_search 0.1
+reverse_image_search 0.2
 Copyright (C) 2012, James Jolly (jamesjolly@gmail.com)
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 import Image
 from math import sqrt
+import pylab as py
+
+c_R, c_G, c_B = 0, 1, 2
 
 def vect_to_str(vect):
    vectstr = ""
@@ -13,25 +16,29 @@ def vect_to_str(vect):
    vectstr += "\n"
    return vectstr
 
+def grayscale(pixel):
+    return (pixel[c_R] + pixel[c_G] + pixel[c_B])/3.0
+
 def get_img_vect(imgpath):
    im = list(Image.open(imgpath).getdata())
    imlen = len(im)
 
-   redsum, greensum, bluesum = 0.0, 0.0, 0.0
+   redsum, greensum, bluesum, graysum = 0.0, 0.0, 0.0, 0.0
    for pixel in im:
-      redsum += pixel[0]
-      greensum += pixel[1]
-      bluesum += pixel[2]
+      redsum += pixel[c_R]
+      greensum += pixel[c_G]
+      bluesum += pixel[c_B]
+      graysum += grayscale(pixel)
 
    redavg = redsum/imlen
    greenavg = greensum/imlen
    blueavg = bluesum/imlen
-   grayavg = (redavg + greenavg + blueavg)/3.0
+   grayavg = graysum/imlen
 
-   graysum = 0.0
+   graysumsqr = 0.0
    for pixel in im:
-      graysum += ((pixel[0] + pixel[1] + pixel[2])/3.0 - grayavg)**2
-   stddev = sqrt(graysum/imlen)
+      graysumsqr += (grayscale(pixel) - grayavg)**2
+   graystddev = sqrt(graysumsqr/imlen)
 
-   return (imgpath, redavg, greenavg, blueavg, stddev)
+   return (imgpath, redavg, greenavg, blueavg, graystddev)
 

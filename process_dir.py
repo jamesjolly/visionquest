@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-reverse_image_search 0.1
+reverse_image_search 0.2
 Copyright (C) 2012, James Jolly (jamesjolly@gmail.com)
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
@@ -9,14 +9,26 @@ import sys
 import process_img
 
 def run(cmd):
-   return commands.getstatusoutput(cmd)[1]
+   status, output = commands.getstatusoutput(cmd)
+   if status != 0:
+       print "problem running: ", cmd
+   return output
+
+def read_dataset(infile):
+   for line in infile:
+      v = [ ]
+      fields = line.split()
+      v.append(fields[0])
+      for field in fields[1:]:
+          v.append(float(field))
+      vects.append(tuple(v))
 
 if len(sys.argv) != 3:
-   print "processdir.py datadir outfile"
+   print "process_dir.py datadir outfile"
    sys.exit(0)
 
 if __name__ == "__main__":
-    
+
    datadirpath = sys.argv[1]
    outfile = open(sys.argv[2], "w")
    for imgdir in run("ls " + datadirpath).split():
