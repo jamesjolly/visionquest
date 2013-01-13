@@ -1,4 +1,4 @@
-reverse_image_search
+visionquest
 ====================
 
 Search a collection of images for similar images given a query image.
@@ -10,14 +10,14 @@ input_img_dir should contain subdirs that each represent an image class,
 containing examples in .png format.  For example...
 
 input_img_dir/class1/example1.png
+
 input_img_dir/class1/example2.png
-input_img_dir/class1/example3.png
+
 input_img_dir/class2/example1.png
-input_img_dir/class2/example2.png
 
 ... could be labels extracted from a input_img_dir. In other words, each 
-label from input_img_dir contains both a class name (like 'class1') and 
-an example name ('like example3.png').
+label from input_img_dir contains both a class name (like 'class2') and 
+an example name (like 'example1.png').
 
 Initial testing has been against a subset of the Amsterdam Library of 
 Object Images.

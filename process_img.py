@@ -1,6 +1,6 @@
 """
-reverse_image_search 0.2
-Copyright (C) 2012, James Jolly (jamesjolly@gmail.com)
+visionquest 0.2
+Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 import Image
@@ -9,12 +9,13 @@ import pylab as py
 
 c_R, c_G, c_B = 0, 1, 2
 
+def get_class(imgpath):
+   # ex. input: 'simpledata/421/421_c.png'
+   # (class is '421')
+   return imgpath.split('/')[-2:][0]
+
 def vect_to_str(vect):
-   vectstr = ""
-   for field in vect:
-      vectstr += (str(field) + " ")
-   vectstr += "\n"
-   return vectstr
+    return " ".join([str(feature) for feature in vect]) + "\n"
 
 def grayscale(pixel):
     return (pixel[c_R] + pixel[c_G] + pixel[c_B])/3.0

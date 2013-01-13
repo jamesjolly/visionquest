@@ -1,6 +1,6 @@
 """
-reverse_image_search 0.2
-Copyright (C) 2012, James Jolly (jamesjolly@gmail.com)
+visionquest 0.2
+Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 from math import sqrt
