@@ -1,10 +1,10 @@
 #!/usr/bin/python
 """
 visionquest 0.2
-Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
+Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
 
-This script helps find the best k for your dataset.
+This script helps find the best K for your dataset.
 """
 import sys
 from collections import defaultdict
@@ -13,7 +13,7 @@ from knn import normalize, get_nearest_k
 from feature_vectors import load_labeled_vectors, normalize_vectors, \
                             get_feature_ranges, get_class_counts
 
-c_benchmark_k_start = 3
+c_benchmark_k_start = 2
 c_benchmark_k_end = 6
 
 if __name__ == "__main__":
@@ -21,6 +21,8 @@ if __name__ == "__main__":
    if len(sys.argv) != 2:
       print "bench_knn.py infile"
       sys.exit(0)
+
+   print "\nsearching for best K between %s and %s..." % (c_benchmark_k_start, c_benchmark_k_end)
 
    infile = open(sys.argv[1], "r")
    feature_vectors = load_labeled_vectors(infile)

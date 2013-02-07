@@ -1,6 +1,6 @@
 """
 visionquest 0.2
-Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
+Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 from math import sqrt

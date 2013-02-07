@@ -1,10 +1,13 @@
 visionquest
 ====================
 
-Search a collection of images for similar images given a query image.
+visionquest searches a collection of images for similar images given a 
+query image. It uses KNN under the hood (see get_nearest_k in knn.py).
 
-The validation pipeline is:
-input_img_dir --> process_dir.py --> feature_vector_file --> bench_knn.py
+To get started, you will need to make feature vectors from your image
+collection. You can do this with process_dir.py, like...
+
+./process_dir.py input_img_dir feature_vector_file
 
 input_img_dir should contain subdirs that each represent an image class,
 containing examples in .png format.  For example...
@@ -19,14 +22,35 @@ input_img_dir/class2/example1.png
 label from input_img_dir contains both a class name (like 'class2') and 
 an example name (like 'example1.png').
 
-Initial testing has been against a subset of the Amsterdam Library of 
-Object Images.
+You can issue a batch of searches with...
 
-This uses KNN under the hood (see get_nearest_k in knn.py). It doesn't
-leverage an index (yet) so it will not scale to large datasets.
+search.py query_vector_file feature_vector_file
 
-I'd like this to work against most image collections, so I'm using 
-the most primitive scale-invariant features imaginable: the means of
-the red, green, and blue components of the image pixel values as well 
-as the standard deviation of the grayscale version of each pixel.
+... where you wish to find the top K most similar images in 
+feature_vector_file for each vector in query_vector_file (both formatted 
+by process_dir.py).
+
+You may wish to tune the K-value to a particular precision/recall level
+for your dataset. You can do this using bench_knn.py, which computes
+these levels for a range of K-values (c_benchmark_k_start to 
+c_benchmark_k_end)...
+
+./bench_knn.py feature_vector_file
+
+Most of my testing has been against subsets of this dataset...
+
+J. M. Geusebroek, G. J. Burghouts, and A. W. M. Smeulders,
+The Amsterdam Library of Object Images,
+IJCV, 61(1), 103-112, January, 2005.
+
+... where each class is an object they have photographed with a 
+variety of different angles, lighting conditions, etc. To robustly work 
+with an image collection as diverse as the above, I'm using very primitive 
+scale-invariant features: the means of the red, green, and blue 
+components of the image pixel values as well as the standard deviation of 
+the grayscale version of each pixel.
+
+visionquest doesn't leverage an index (yet) so it will not scale to 
+large datasets. If you find it useful or have a suggestion for an 
+improvement, let me know!
 

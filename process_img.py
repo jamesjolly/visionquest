@@ -1,11 +1,10 @@
 """
 visionquest 0.2
-Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
+Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 import Image
 from math import sqrt
-import pylab as py
 
 c_R, c_G, c_B = 0, 1, 2
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 visionquest 0.2
-Copyright (C) 2012-2013, James Jolly (jamesjolly@gmail.com)
+Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 import commands
@@ -13,15 +13,6 @@ def run(cmd):
    if status != 0:
        print "problem running: ", cmd
    return output
-
-def read_dataset(infile):
-   for line in infile:
-      v = [ ]
-      fields = line.split()
-      v.append(fields[0])
-      for field in fields[1:]:
-          v.append(float(field))
-      vects.append(tuple(v))
 
 if len(sys.argv) != 3:
    print "process_dir.py datadir outfile"
