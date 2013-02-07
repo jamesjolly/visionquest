@@ -6,7 +6,7 @@ See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 import commands
 import sys
-import process_img
+from visionquest.image_ops import get_img_vect, vect_to_str
 
 def run(cmd):
    status, output = commands.getstatusoutput(cmd)
@@ -26,8 +26,8 @@ if __name__ == "__main__":
       imgdirpath = datadirpath + "/" + imgdir
       for img in run("ls " + imgdirpath).split():
          imgpath = imgdirpath + "/" + img
-         vect = process_img.get_img_vect(imgpath)
+         vect = get_img_vect(imgpath)
          print vect
-         outfile.write(process_img.vect_to_str(vect))
+         outfile.write(vect_to_str(vect))
    outfile.close()
 

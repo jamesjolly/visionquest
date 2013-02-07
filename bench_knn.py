@@ -8,10 +8,12 @@ This script helps find the best K for your dataset.
 """
 import sys
 from collections import defaultdict
-from process_img import get_class
-from knn import normalize, get_nearest_k
-from feature_vectors import load_labeled_vectors, normalize_vectors, \
-                            get_feature_ranges, get_class_counts
+from visionquest.image_ops import get_class
+from visionquest.knn import normalize, get_nearest_k
+from visionquest.feature_vectors import load_labeled_vectors, \
+                                        normalize_vectors, \
+                                        get_feature_ranges, \
+                                        get_class_counts
 
 c_benchmark_k_start = 2
 c_benchmark_k_end = 6

@@ -5,7 +5,7 @@ See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 from collections import defaultdict
 from knn import normalize
-from process_img import get_class
+from image_ops import get_class
 
 def load_labeled_vectors(infile):
    labeled_vectors = [ ]

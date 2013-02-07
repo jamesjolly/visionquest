@@ -16,9 +16,10 @@ that line being the top K most similar vectors in the dataset queried
 (ordered from most to least similar).
 """
 import sys
-from knn import normalize, get_nearest_k
-from feature_vectors import load_labeled_vectors, normalize_vectors, \
-                            get_feature_ranges
+from visionquest.knn import normalize, get_nearest_k
+from visionquest.feature_vectors import load_labeled_vectors, \
+                                        normalize_vectors, \
+                                        get_feature_ranges
 
 c_K = 3 # number of results to be returned by KNN
 
