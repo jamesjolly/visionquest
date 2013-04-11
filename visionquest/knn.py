@@ -4,7 +4,7 @@ Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
 """
 from math import sqrt
-from heapq import heappush, heappop
+from heapq import heappush, nsmallest
 
 def dist(vect_A, vect_B):
    d = 0.0
@@ -12,14 +12,11 @@ def dist(vect_A, vect_B):
       d += (val_A - val_B)**2
    return sqrt(d)
 
-def get_nearest_k(query_vector, dataset, k):
+def get_nearest_k(query_vector, dataset, K):
    pq = [ ]
-   for label, vector in dataset:
-       heappush(pq, (dist(query_vector, vector), (label, vector)))
-   closest = [ ]
-   for kcount in range(0, k):
-      closest.append(heappop(pq))
-   return closest
+   for dataset_label, dataset_vector in dataset:
+       heappush(pq, (dist(query_vector, dataset_vector), (dataset_label, dataset_vector)))
+   return nsmallest(K, pq)
 
 def normalize(vector, mins, maxes):
     v_out = [ ]

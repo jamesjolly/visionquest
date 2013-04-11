@@ -3,6 +3,10 @@
 visionquest 0.2
 Copyright (C) 2012-2013, James Jolly
 See MIT-LICENSE.txt for legalese and README.md for usage.
+
+This script crawls a directory of image files grouped
+into classes and computes features for each image. It
+then writes them to outfile.
 """
 import commands
 import sys
@@ -14,11 +18,11 @@ def run(cmd):
        print "problem running: ", cmd
    return output
 
-if len(sys.argv) != 3:
-   print "process_dir.py datadir outfile"
-   sys.exit(0)
-
 if __name__ == "__main__":
+
+   if len(sys.argv) != 3:
+      print "process_dir.py datadir outfile"
+      sys.exit(0)
 
    datadirpath = sys.argv[1]
    outfile = open(sys.argv[2], "w")
@@ -27,7 +31,7 @@ if __name__ == "__main__":
       for img in run("ls " + imgdirpath).split():
          imgpath = imgdirpath + "/" + img
          vect = get_img_vect(imgpath)
-         print vect
+         print "processed", vect
          outfile.write(vect_to_str(vect))
    outfile.close()
 

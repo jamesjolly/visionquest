@@ -7,30 +7,27 @@ from collections import defaultdict
 from knn import normalize
 from image_ops import get_class
 
-def load_labeled_vectors(infile):
-   labeled_vectors = [ ]
+def load_vectors(infile):
+   vectors = [ ]
    for line in infile:
       fields = line.split()
-      label = fields[0]
-      fields = tuple([float(field) for field in fields[1:]])
-      labeled_vectors.append((label, fields))
-   return labeled_vectors
+      label, features = fields[0], tuple([float(field) for field in fields[1:]])
+      vectors.append((label, features))
+   return vectors
 
-def normalize_vectors(feature_vectors, feat_mins, feat_maxes):
+def normalize_vectors(vectors, feat_mins, feat_maxes):
     # scales each vector in feature_vectors to [0, 1] based upon ranges
     # established by feat_mins, feat_maxes
     normalized_vectors = [ ]
-    for label, vector in feature_vectors:
-       normalized_vector = normalize(vector, feat_mins, feat_maxes)
-       normalized_vectors.append((label, normalized_vector))
+    for label, vector in vectors:
+       normalized_vectors.append((label, normalize(vector, feat_mins, feat_maxes)))
     return normalized_vectors
 
-def get_feature_ranges(labeled_vectors):
+def get_feature_ranges(vectors):
    # needed for normalization
    feature_mins, feature_maxes = [ ], [ ]
-   labels, feature_vectors = zip(*labeled_vectors)
-   feature_values = zip(*feature_vectors)
-   for values in feature_values:
+   labels, features = zip(*vectors)
+   for values in zip(*features):
        feature_mins.append(min(values))
        feature_maxes.append(max(values))
    return feature_mins, feature_maxes
